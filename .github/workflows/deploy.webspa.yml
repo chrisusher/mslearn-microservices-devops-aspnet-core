@@ -28,6 +28,7 @@ jobs:
         push: true
 
   deploy-to-aks:
+    needs: build-and-push-docker-image
     runs-on: ubuntu-latest
     steps:
     - name: Azure Kubernetes set context
