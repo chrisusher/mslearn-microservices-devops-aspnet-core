@@ -5,6 +5,7 @@ on:
     paths:
     - 'src/Web/WebSPA/**'
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build-and-push-docker-image:
