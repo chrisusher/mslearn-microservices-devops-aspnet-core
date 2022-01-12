@@ -3,7 +3,7 @@ name: eShop deploy WebSPA
 on:
   push:
     paths:
-    - 'src/Web/WebSPA/*'
+    - 'src/Web/WebSPA/**'
     branches: [ main ]
 
 jobs:

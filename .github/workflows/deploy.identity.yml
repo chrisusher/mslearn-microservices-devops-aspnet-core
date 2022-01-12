@@ -3,7 +3,7 @@ name: eShop deploy Identity
 on:
   push:
     paths:
-    - 'src/Services/Identity/*'
+    - 'src/Services/Identity/**'
     branches: [ main ]
 
 jobs:
