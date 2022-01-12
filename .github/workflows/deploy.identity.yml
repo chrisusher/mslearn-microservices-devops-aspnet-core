@@ -1,0 +1,62 @@
+name: eShop deploy Identity
+
+on:
+  push:
+    paths:
+    - 'src/Services/Identity/*'
+    branches: [ main ]
+
+jobs:
+  build-and-push-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get code from the repository
+      uses: actions/checkout@v1
+      with:
+        ref: main
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v1.1.0
+      with:
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+        registry: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+        path: .
+        dockerfile: './src/Services/Identity/Identity.API/Dockerfile'
+        repository: 'identity.api'
+        tags: 'linux-latest'
+        push: true
+
+  deploy-to-aks:
+    needs: build-and-push-docker-image
+    runs-on: ubuntu-latest
+    steps:
+    - name: Azure Kubernetes set context
+      uses: Azure/aks-set-context@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        resource-group: 'eshop-learn-rg'
+        cluster-name: 'eshop-learn-aks'
+
+    - name: Get code from the repository
+      uses: actions/checkout@v1
+      with:
+        ref: main
+
+    - name: Helm tool installer
+      uses: Azure/setup-helm@v1
+
+    - name: Azure Login
+      uses: Azure/login@v1.1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Deploy
+      run: >
+        helm upgrade 
+        --install eshoplearn-identity
+        --namespace=default 
+        --set registry=${{ secrets.REGISTRY_LOGIN_SERVER }} 
+        --set imagePullPolicy=Always 
+        --set host=${{ secrets.IP_ADDRESS }} 
+        --set protocol=http './deploy/k8s/helm-simple/identity'
