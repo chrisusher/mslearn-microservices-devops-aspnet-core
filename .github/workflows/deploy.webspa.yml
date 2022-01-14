@@ -60,9 +60,7 @@ jobs:
     - uses: azure/k8s-deploy@v1.2
       with:
         namespace: default
-        manifests: |
-          deploy/k8s/helm-simple/webspa/templates/deployment.yaml
-          deploy/k8s/helm-simple/webspa/templates/service.yaml
+        manifests: deploy/k8s/helm-simple/webspa/templates/deployment.yaml
         images: |
           ${{ secrets.REGISTRY_LOGIN_SERVER }}/webspa:${{ github.sha }}
         imagepullsecrets: |
