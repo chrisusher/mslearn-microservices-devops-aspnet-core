@@ -18,8 +18,8 @@ spec:
     spec:
       containers:
         - name: webspa
-          image: {{ .Values.registry }}/webspa:linux-latest
-          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          image: myacr.azurecr.io/webspa
+          imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 80
