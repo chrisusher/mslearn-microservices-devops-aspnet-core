@@ -50,31 +50,13 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - uses: azure/k8s-create-secret@v1
-      with:
-        namespace: default
-        container-registry-url: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-        container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
-        container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-        secret-name: eshoplearnakdockerauth
-
-    - uses: azure/k8s-deploy@v1.2
-      with:
-        namespace: default
-        manifests: |
-          deploy/k8s/helm-simple/webspa/templates/deployment.yaml
-          deploy/k8s/helm-simple/webspa/templates/service.yaml
-        images: |
-          ${{ secrets.REGISTRY_LOGIN_SERVER }}/webspa:${{ github.sha }}
-        imagepullsecrets: |
-          eshoplearnakdockerauth
-
-    # - name: Deploy
-    #   run: >
-    #     helm upgrade 
-    #     --install eshoplearn-webspa
-    #     --namespace=default 
-    #     --set registry=${{ secrets.REGISTRY_LOGIN_SERVER }} 
-    #     --set imagePullPolicy=Always 
-    #     --set host=${{ secrets.IP_ADDRESS }} 
-    #     --set protocol=http './deploy/k8s/helm-simple/webspa'
+    - name: Deploy
+      run: >
+        helm upgrade 
+        --install eshoplearn-webspa
+        --namespace=default 
+        --set gitsha=${{ github.sha }}
+        --set registry=${{ secrets.REGISTRY_LOGIN_SERVER }} 
+        --set imagePullPolicy=Always 
+        --set host=${{ secrets.IP_ADDRESS }} 
+        --set protocol=http './deploy/k8s/helm-simple/webspa'
