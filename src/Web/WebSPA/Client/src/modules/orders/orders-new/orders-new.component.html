@@ -124,7 +124,7 @@
             <div class="esh-orders_new-buttons d-flex justify-content-end align-items-center">
                 <a class="btn btn-secondary" routerLink="/basket">Back to basket</a>
 
-                <button class="btn btn-primary ml-3" [disabled]="!newOrderForm.valid || isOrderProcessing">Place Order</button>
+                <button id="btnPlaceOrder" class="btn btn-primary ml-3" [disabled]="!newOrderForm.valid || isOrderProcessing">Place Order</button>
             </div>
         </section>
     </form>
