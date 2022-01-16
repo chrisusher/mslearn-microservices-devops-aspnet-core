@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: webspa
-          image: {{ .Values.registry }}/webspa:linux-latest
+          image: {{ .Values.registry }}/webspa:{{ .Values.gitsha }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           ports:
             - name: http

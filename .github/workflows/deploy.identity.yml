@@ -1,12 +1,11 @@
-name: eShop deploy WebSPA
+name: eShop deploy Identity
 
 on:
   push:
     paths:
-    - 'src/Web/WebSPA/**'
-    - 'manifests/Web/WebSPA/**'
+    - 'src/Services/Identity/**'
     branches: [ main ]
-  workflow_dispatch:
+  workflow_dispatch:      
 
 jobs:
   build-and-push-docker-image:
@@ -24,9 +23,9 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
         registry: ${{ secrets.REGISTRY_LOGIN_SERVER }}
         path: .
-        dockerfile: './src/Web/WebSPA/Dockerfile.acr'
-        repository: 'webspa'
-        tags: ${{ github.sha }}
+        dockerfile: './src/Services/Identity/Identity.API/Dockerfile.acr'
+        repository: 'identity.api'
+        tags: 'linux-latest'
         push: true
 
   deploy-to-aks:
@@ -45,6 +44,9 @@ jobs:
       with:
         ref: main
 
+    - name: Helm tool installer
+      uses: Azure/setup-helm@v1
+
     - name: Azure Login
       uses: Azure/login@v1.1
       with:
@@ -53,10 +55,9 @@ jobs:
     - name: Deploy
       run: >
         helm upgrade 
-        --install eshoplearn-webspa
+        --install eshoplearn-identity
         --namespace=default 
-        --set gitsha=${{ github.sha }}
         --set registry=${{ secrets.REGISTRY_LOGIN_SERVER }} 
         --set imagePullPolicy=Always 
         --set host=${{ secrets.IP_ADDRESS }} 
-        --set protocol=http './deploy/k8s/helm-simple/webspa'
+        --set protocol=http './deploy/k8s/helm-simple/identity'
