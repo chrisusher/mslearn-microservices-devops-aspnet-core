@@ -369,3 +369,5 @@ MigrationBackup/
 **/healthchecksdb-wal
 
 **/tempkey.rsa
+
+*.feature.cs

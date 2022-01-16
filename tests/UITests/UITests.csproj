@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+    <PackageReference Include="Microsoft.Playwright" Version="1.17.3" />
+    <PackageReference Include="NUnit" Version="3.13.2" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.0.0" />
+    <PackageReference Include="coverlet.collector" Version="3.1.0" />
+    <PackageReference Include="RestSharp" Version="107.0.3" />
+    <PackageReference Include="Specflow" Version="3.9.40" />
+    <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.9.40" />
+    <PackageReference Include="TestingSupport.PlaywrightHelpers" Version="0.2.0" />
+  </ItemGroup>
+
+</Project>
