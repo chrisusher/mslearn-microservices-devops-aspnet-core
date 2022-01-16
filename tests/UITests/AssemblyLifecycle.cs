@@ -2,10 +2,10 @@ using NUnit.Framework;
 
 namespace UITests
 {
-   [SetupFixture]
+   [SetUpFixture]
    public class AssemblyLifecycle
    {
-      [OneTimeSetup]
+      [OneTimeSetUp]
       public static void AssemblySetup()
       {
 

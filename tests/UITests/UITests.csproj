@@ -18,6 +18,7 @@
     <PackageReference Include="Specflow" Version="3.9.40" />
     <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.9.40" />
     <PackageReference Include="TestingSupport.PlaywrightHelpers" Version="0.2.0" />
+    <PackageReference Include="GitInfo" Version="2.2.0" />
   </ItemGroup>
 
 </Project>

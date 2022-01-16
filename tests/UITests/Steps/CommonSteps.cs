@@ -1,9 +1,13 @@
+using TechTalk.SpecFlow;
+
 namespace UITests.Steps
 {
     [Binding]
     public class CommonSteps
     {
-        public CommonSteps(ScenarioContext ScenarioContext)
+        private ScenarioContext _scenarioContext;
+
+        public CommonSteps(ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
         }

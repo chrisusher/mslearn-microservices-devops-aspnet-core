@@ -1,3 +1,5 @@
+using UITests.Config;
+
 namespace UITests
 {
    public class Common
