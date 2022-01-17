@@ -1,4 +1,9 @@
+using System;
+using System.IO;
+using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
+using UITests.Config;
+using UITests.Helpers;
 
 namespace UITests
 {
@@ -8,13 +13,23 @@ namespace UITests
       [OneTimeSetUp]
       public static void AssemblySetup()
       {
+         var configBuilder = new ConfigurationBuilder()
+                                 .AddJsonFile(Path.Combine(Environment.CurrentDirectory, "appsettings.json"))
+                                 .AddEnvironmentVariables();
+         
+         var configuration = configBuilder.Build();
 
+         Common.Settings = configuration.GetSection("UITestSettings").Get<UITestSettings>();
+
+         DeploymentHelper.WaitForDeployment();
+
+         BrowserHelper.SetupBrowser();
       }
 
       [OneTimeTearDown]
       public void AssemblyTeardown()
       {
-
+         _ = Common.Browser.DisposeAsync();
       }
    }
 }
