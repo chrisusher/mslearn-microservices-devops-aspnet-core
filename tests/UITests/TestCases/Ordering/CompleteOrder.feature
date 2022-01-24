@@ -1,5 +1,6 @@
 Feature: Users can order Items from the Store
 
+    @Smoke
     Scenario: Complete an Order
         Given I am logged in
         When I add an Item
