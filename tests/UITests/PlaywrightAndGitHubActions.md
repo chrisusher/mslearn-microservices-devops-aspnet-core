@@ -11,10 +11,6 @@ header: Playwright Zero to Hero
 @testingpro
 [GitHub - chrisusher](https://github.com/chrisusher)
 
---- 
-
-# Step 1. Install Playwright
-
 ---
 
 ## Tonight's Tools:
