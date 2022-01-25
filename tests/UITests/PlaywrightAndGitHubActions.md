@@ -7,9 +7,19 @@ header: Playwright Zero to Hero
 # **Playwright** - Zero* to Hero
 **With GitHub Actions**
 
-### Chris Usher ###
+### Chris Usher
+**SDET** - INSTANDA
+ 
 @testingpro
 [GitHub - chrisusher](https://github.com/chrisusher)
+
+---
+
+# About Me
+
+## **Test Analyst** -> **SDET** -> **Test Lead** -> **QA Manager** -> **Head of QA** -> **SDET**
+
+### ~8 years as a Selenium User
 
 ---
 
@@ -78,12 +88,28 @@ header: Playwright Zero to Hero
 
 ---
 
+## Continuous Integration (CI)
+
+### Why should Tests run in CI?
+
+# **It's *NOT* automated if there are Humans involved during the process!!*** 
+
+###### We can start a pipeline which causes tests to run, of course!
+
+---
+
 ## GitHub Actions Time
 
-# [Actions](https://github.com/chrisusher/mslearn-microservices-devops-aspnet-core/actions/new)
-
-### *Demo* - Create Action which runs Smoke Tests on Demand
+### *Demo* - [Create Action which runs Smoke Tests on Demand](https://github.com/chrisusher/mslearn-microservices-devops-aspnet-core/actions/new) 
 
 ---
 
 ## (Extra Credit, if Time) Run Tests after K8s Deployment
+
+---
+
+# Conclusion?...
+
+---
+
+# Playwright for the Win!
