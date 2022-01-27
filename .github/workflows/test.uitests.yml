@@ -1,0 +1,55 @@
+name: Run UI Smoke Tests Demo
+
+on:
+  push:
+    paths:
+      - "tests/UITests/**"
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  run-test:
+    name: Run Smoke UI Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.x
+      
+      - name: Configure Tests
+        shell: pwsh
+        run: |
+          $config = Get-Content tests/UITests/appsettings.json | ConvertFrom-Json;
+          $config.UITestSettings.Headless = [System.Boolean]::Parse("true");
+          $config | ConvertTo-Json | Set-Content tests/UITests/appsettings.json; 
+
+      - name: Build Tests
+        run: dotnet build tests/UITests/UITests.csproj
+
+      - name: Install Playwright Dependencies
+        run: |
+          dotnet tool install --global Microsoft.Playwright.CLI
+          playwright install-deps
+
+      - name: Run Smoke Tests
+        run: |
+          cd ./tests/UITests
+          playwright install
+          dotnet test --filter="TestCategory=Smoke&TestCategory!=wip" --logger "trx"
+        continue-on-error: true
+
+      - uses: dorny/test-reporter@v1.5.0
+        name: Publish Test Report
+        with:
+          name: test-results
+          path: ./**/*.trx
+          reporter: dotnet-trx
+
+      - name: Archive Playwright Trace
+        uses: actions/upload-artifact@v2
+        with:
+          name: Playwright Trace
+          path: tests/UITests/bin/**/*.zip

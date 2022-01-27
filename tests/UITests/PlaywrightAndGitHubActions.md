@@ -8,7 +8,7 @@ header: Playwright Zero to Hero
 **With GitHub Actions**
 
 ### Chris Usher
-**SDET** - INSTANDA
+**SDET** @ INSTANDA
  
 @testingpro
 [GitHub - chrisusher](https://github.com/chrisusher)

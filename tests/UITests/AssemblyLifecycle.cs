@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Playwright;
 using NUnit.Framework;
 using UITests.Config;
 using UITests.Helpers;
@@ -29,6 +30,12 @@ namespace UITests
       [OneTimeTearDown]
       public void AssemblyTeardown()
       {
+         var stopTracing = Common.Context.Tracing.StopAsync(new TracingStopOptions
+         {
+            Path = "trace.zip"
+         });
+         stopTracing.GetAwaiter().GetResult();
+
          _ = Common.Browser.DisposeAsync();
       }
    }
