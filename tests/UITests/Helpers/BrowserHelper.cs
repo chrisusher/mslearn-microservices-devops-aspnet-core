@@ -18,10 +18,31 @@ namespace UITests.Helpers
                         Headless = Common.Settings.Headless
                     }).Result;
                     break;
+
+                case Model.Enums.BrowserType.Edge:
+                    PlaywrightCommon.Browser = PlaywrightCommon.PlaywrightInstance.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+                    {
+                        Channel = "msedge",
+                        Headless = Common.Settings.Headless
+                    }).Result;
+                    break;
+
+                case Model.Enums.BrowserType.Firefox:
+                    PlaywrightCommon.Browser = PlaywrightCommon.PlaywrightInstance.Firefox.LaunchAsync(new BrowserTypeLaunchOptions
+                    {
+                        Headless = Common.Settings.Headless
+                    }).Result;
+                    break;
+
+                case Model.Enums.BrowserType.Safari:
+                    PlaywrightCommon.Browser = PlaywrightCommon.PlaywrightInstance.Webkit.LaunchAsync(new BrowserTypeLaunchOptions
+                    {
+                        Headless = Common.Settings.Headless
+                    }).Result;
+                    break;
             }
 
             Common.Context = PlaywrightCommon.Browser.NewContextAsync().Result;
-
             Common.Context.Tracing.StartAsync(new TracingStartOptions
             {
                 Screenshots = true,

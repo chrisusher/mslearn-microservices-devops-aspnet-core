@@ -26,8 +26,7 @@ namespace UITests.UI.Controllers
                     {
                         return false;
                     }
-
-                    return false;
+                    return true;
                 }
                 catch (System.Exception)
                 {
@@ -52,6 +51,14 @@ namespace UITests.UI.Controllers
                 LoginPage.PasswordTextbox.SendKeys(password);
 
                 LoginPage.LoginButton.Click();
+            }
+        }
+
+        public static void Logout()
+        {
+            if(IsLoggedIn)
+            {   
+                //TODO Implement Logout
             }
         }
     }

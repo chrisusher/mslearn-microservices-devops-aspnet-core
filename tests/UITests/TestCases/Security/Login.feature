@@ -1,5 +1,6 @@
 Feature: Users can Login and Invalid Users cannot login
 
+   @Smoke
    Scenario Outline: Valid Users can Successfully Login
       Given I am not logged in
       When I login with Email '<Email>' and Password '<Password>'

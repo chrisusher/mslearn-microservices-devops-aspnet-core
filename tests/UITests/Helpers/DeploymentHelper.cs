@@ -8,7 +8,7 @@ namespace UITests.Helpers
     {
         public static void WaitForDeployment()
         {
-            if (Common.IsGitHubActions)
+            if (Common.IsGitHubActions && Git.Branch.Contains("main"))
             {
                 WaitUtility.WaitFor(() => APIHelper.API.GetResponse("version/git").Content != Git.Sha, "Deployment to Complete...", true, TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(10));
             }
